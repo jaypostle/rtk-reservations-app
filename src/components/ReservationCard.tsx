@@ -8,8 +8,8 @@ interface ReservationCardTypes {
 function ReservationCard({ name, index }: ReservationCardTypes) {
   const dispatch = useDispatch();
 
-  const handleRemoveReservation = (event: React.MouseEvent<HTMLElement>) => {
-    dispatch(removeReservation(name));
+  const handleRemoveReservation = () => {
+    dispatch(removeReservation(index));
     // console.log(event.currentTarget.textContent);
     // dispatch(removeReservation(event.currentTarget.textContent));
   };
