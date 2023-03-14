@@ -16,8 +16,9 @@ export const reservationsSlice = createSlice({
       // do this to set the proper type
       state.value.push(action.payload);
     },
-    removeReservation: (state, action: PayloadAction<string>) => {
-      return state.value.filter((name) => name !== action.payload);
+    removeReservation: (state, action: PayloadAction<number>) => {
+      console.log(action.payload);
+      state.value.splice(action.payload, 1);
     },
   },
 });

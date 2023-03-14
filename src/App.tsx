@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
 import { RootState } from "./app/store";
+import CustomerCard from "./components/CustomerCard";
 import ReservationCard from "./components/ReservationCard";
 import {
   addReservation,
@@ -15,6 +16,8 @@ function App() {
     (state: RootState) => state.reservations.value
   );
 
+  const customers = useSelector((state: RootState) => state.customers.value);
+
   const dispatch = useDispatch();
 
   const handleAddReservation = () => {
@@ -22,10 +25,6 @@ function App() {
     dispatch(addReservation(reservationNameInput)); // just wrap your addReservation action + value in dispatch
     // then clear state
     setReservationNameInput("");
-  };
-
-  const handleRemoveReservation = () => {
-    dispatch(removeReservation(reservationNameInput));
   };
 
   return (
@@ -52,16 +51,16 @@ function App() {
           </div>
         </div>
         <div className="customer-food-container">
-          <div className="customer-food-card-container">
-            <p>Selena Gomez</p>
-            <div className="customer-foods-container">
-              <div className="customer-food"></div>
-              <div className="customer-food-input-container">
-                <input />
-                <button>Add</button>
-              </div>
-            </div>
-          </div>
+          {customers &&
+            customers.map((customer) => {
+              return (
+                <CustomerCard
+                  id={customer.id}
+                  name={customer.name}
+                  food={customer.food}
+                />
+              );
+            })}
         </div>
       </div>
     </div>

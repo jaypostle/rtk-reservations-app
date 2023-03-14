@@ -1,5 +1,7 @@
 import { removeReservation } from "../features/reservationsSlice";
 import { useDispatch } from "react-redux";
+import { addCustomer } from "../features/customersSlice";
+import { v4 as uuid } from "uuid";
 
 interface ReservationCardTypes {
   name: string;
@@ -8,8 +10,15 @@ interface ReservationCardTypes {
 function ReservationCard({ name, index }: ReservationCardTypes) {
   const dispatch = useDispatch();
 
-  const handleRemoveReservation = (event: React.MouseEvent<HTMLElement>) => {
-    dispatch(removeReservation(name));
+  const handleRemoveReservation = () => {
+    dispatch(removeReservation(index));
+    dispatch(
+      addCustomer({
+        id: uuid(),
+        name: name,
+        food: [],
+      })
+    );
     // console.log(event.currentTarget.textContent);
     // dispatch(removeReservation(event.currentTarget.textContent));
   };
