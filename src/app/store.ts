@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import reservationsReducer from "../features/reservationsSlice";
+import customerReducer from "../features/customersSlice";
 
 export const store = configureStore({
   reducer: {
     // all of the different slices go here
     reservations: reservationsReducer,
+    customers: customerReducer,
   },
 });
 

@@ -16,6 +16,8 @@ function App() {
     (state: RootState) => state.reservations.value
   );
 
+  const customers = useSelector((state: RootState) => state.customers.value);
+
   const dispatch = useDispatch();
 
   const handleAddReservation = () => {
@@ -49,9 +51,15 @@ function App() {
           </div>
         </div>
         <div className="customer-food-container">
-          {reservations &&
-            reservations.map((name, index) => {
-              return <CustomerCard name={name} index={index} key={index} />;
+          {customers &&
+            customers.map((customer) => {
+              return (
+                <CustomerCard
+                  id={customer.id}
+                  name={customer.name}
+                  food={customer.food}
+                />
+              );
             })}
         </div>
       </div>
